@@ -1,7 +1,7 @@
-import { db } from '@/db'
+import bcrypt from 'bcryptjs'
+import { db } from '@/db/client'
 import { usersTable } from '@/db/schema/schema'
 import { SignupFormSchema, FormState } from '@/lib/definitions'
-import bcrypt from 'bcrypt'
 
 export async function signup(state: FormState, formData: FormData) {
   // 1. Validate form fields

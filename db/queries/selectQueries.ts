@@ -1,5 +1,7 @@
-import { db } from '../index';
+'use server'
+
 import { eq } from 'drizzle-orm';
+import { db } from '@/db/client';
 import { SelectUser, usersTable } from '../schema/schema';
 
 // 查询用户数据
