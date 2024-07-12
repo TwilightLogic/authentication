@@ -1,4 +1,4 @@
-import { SignupFormSchema, FormState } from '@/app/lib/definitions'
+import { SignupFormSchema, FormState } from '@/lib/definitions'
 import bcrypt from 'bcrypt'
 
 export async function signup(state: FormState, formData: FormData) {
