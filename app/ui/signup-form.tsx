@@ -1,8 +1,8 @@
 'use client'
 
 import { useActionState } from 'react'
-import { signup } from '@/app/actions/auth'
 import { useFormStatus } from 'react-dom'
+import { signup } from '@/app/actions/auth'
 
 export function SignupForm() {
   const [state, action] = useActionState(signup, undefined)
@@ -18,7 +18,7 @@ export function SignupForm() {
 
       <div>
         <label htmlFor="email">Email</label>
-        <input id="email" name="email" type="email" placeholder="Email" />
+        <input id="email" name="email" placeholder="Email" />
       </div>
       {state?.errors?.email && <p>{state.errors.email}</p>}
 
@@ -26,17 +26,16 @@ export function SignupForm() {
         <label htmlFor="password">Password</label>
         <input id="password" name="password" type="password" />
       </div>
-      {state?.errors?.email && (
+      {state?.errors?.password && (
         <div>
           <p>Password must:</p>
           <ul>
-            {state.errors.password!.map((error) => (
+            {state.errors.password.map((error) => (
               <li key={error}>- {error}</li>
             ))}
           </ul>
         </div>
       )}
-
       <button aria-disabled={pending} type="submit">
         {pending ? 'Submitting...' : 'Sign up'}
       </button>

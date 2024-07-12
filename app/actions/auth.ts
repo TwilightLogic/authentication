@@ -1,7 +1,8 @@
 import { SignupFormSchema, FormState } from '@/app/lib/definitions'
+import bcrypt from 'bcrypt'
 
 export async function signup(state: FormState, formData: FormData) {
-  // Validate form fields
+  // 1. Validate form fields
   const validatedFields = SignupFormSchema.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
@@ -15,5 +16,11 @@ export async function signup(state: FormState, formData: FormData) {
     }
   }
 
-  // Call the provider or db to create a user...
+  // 2. Parse data for insertion into database
+  const { name, email, password } = validatedFields.data
+  // e.g. Hash the user's password before storing it
+  const hashedPassword = await bcrypt.hash(password, 10)
+
+  // 3. Insert the user into the database or call an Auth Library's API
+  // TODO: add db here
 }
