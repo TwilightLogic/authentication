@@ -1,10 +1,14 @@
 import { getUserByEmail } from "./queries/selectQueries";
 
 async function testQuery() {
-  const user = await getUserByEmail('alice@example.com');
-  console.log('Queried User:', user);
+  try {
+    const user = await getUserByEmail('alice@example.com');
+    console.log('Queried User:', user);
+    process.exit(0); // 成功退出
+  } catch (error) {
+    console.error('Query failed:', error);
+    process.exit(1); // 失败退出
+  }
 }
 
-testQuery().catch((error) => {
-  console.error('Query failed:', error);
-});
+testQuery();

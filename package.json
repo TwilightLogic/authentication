@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "tsx db/seed.ts"
+    "seed": "tsx db/seed.ts",
+    "query": "tsx db/test.ts"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
