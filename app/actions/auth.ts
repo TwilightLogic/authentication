@@ -37,13 +37,7 @@ export async function signup(state: FormState, formData: FormData) {
   }
 
   // 4. Insert the user into the database
-  await createUser({
-    name: 'Charlie2',
-    email: 'charlie2@example.com',
-    password: 'Password123!',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  })
+  await createUser(user)
 
   // TODO
   // 5. Create session
