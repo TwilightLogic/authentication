@@ -4,29 +4,29 @@ import { createUser } from "./queries/insertQueries";
 async function seed() {
   const users: InsertUser[] = [
     {
-      name: 'Alice',
-      email: 'alice@example.com',
+      name: 'Alice2',
+      email: 'alice2@example.com',
       password: 'Password123!',
       createdAt: new Date(),
       updatedAt: new Date(),
     },
     {
-      name: 'Bob',
-      email: 'bob@example.com',
+      name: 'Bob2',
+      email: 'bob2@example.com',
       password: 'Password123!',
       createdAt: new Date(),
       updatedAt: new Date(),
     },
     {
-      name: 'Charlie',
-      email: 'charlie@example.com',
+      name: 'Charlie2',
+      email: 'charlie2@example.com',
       password: 'Password123!',
       createdAt: new Date(),
       updatedAt: new Date(),
     },
   ];
 
-  for (const user of users) {
+  for (const user of users) {  
     await createUser(user);
   }
 

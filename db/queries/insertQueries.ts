@@ -1,9 +1,16 @@
-'use server'
+'use client'
 
 import { InsertUser, usersTable } from '@/db/schema/schema';
 import { db } from '@/db/client';
 
-// 插入用户数据
 export async function createUser(data: InsertUser) {
-  await db.insert(usersTable).values(data);
+  console.log('data from insert', data);
+  
+
+  const result = await db
+    .insert(usersTable)
+    .values(data)
+    .returning({ id: usersTable.id, name: usersTable.name, email: usersTable.email, createdAt: usersTable.createdAt, updatedAt: usersTable.updatedAt });
+
+  return result[0];
 }

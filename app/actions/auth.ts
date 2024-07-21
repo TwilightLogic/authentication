@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
-import { db } from '@/db/client'
-import { usersTable } from '@/db/schema/schema'
+import { InsertUser } from '@/db/schema/schema'
+import { createUser } from '@/db/queries/insertQueries'
 import { SignupFormSchema, FormState } from '@/lib/definitions'
 
 export async function signup(state: FormState, formData: FormData) {
@@ -23,25 +23,29 @@ export async function signup(state: FormState, formData: FormData) {
   // e.g. Hash the user's password before storing it
   const hashedPassword = await bcrypt.hash(password, 10)
 
-  // 3. Insert the user into the database or call an Auth Library's API
-  const data = await db
-    .insert(usersTable)
-    .values({
-      name,
-      email,
-      password: hashedPassword,
-    })
-    .returning({ id: usersTable.id })
+  // Debug: Print db object and other information
+  console.log('Validated Fields:', validatedFields)
+  console.log('Hashed Password:', hashedPassword)
 
-  const user = data[0]
-
-  if (!user) {
-    return {
-      message: 'An error occurred while creating your account.',
-    }
+  // 3. Prepare user data
+  const user: InsertUser = {
+    name,
+    email,
+    password: hashedPassword,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   }
 
-  // TODO:
-  // 4. Create user session
-  // 5. Redirect user
+  // 4. Insert the user into the database
+  await createUser({
+    name: 'Charlie2',
+    email: 'charlie2@example.com',
+    password: 'Password123!',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  })
+
+  // TODO
+  // 5. Create session
+  // 6. Redirect user
 }
